@@ -1,0 +1,64 @@
+{
+  "project_name": "Wolf AI",
+  "version": "0.1",
+  "model_type": "gpt",
+  "description": "Wolf AI — a growing conversational model evolving from sentence completion to a full personality-driven chatbot.",
+
+  "architecture": {
+    "vocab_size": 50257,
+    "max_position_embeddings": 2048,
+    "hidden_size": 512,
+    "num_hidden_layers": 8,
+    "num_attention_heads": 8,
+    "intermediate_size": 2048,
+    "layer_norm_epsilon": 1e-5,
+    "dropout": 0.1
+  },
+
+  "tokenizer": {
+    "vocab_file": "vocab.txt",
+    "merges_file": "merges.txt",
+    "tokenizer_json": "tokenizer.json",
+    "special_tokens": {
+      "pad_token": "<pad>",
+      "unk_token": "<unk>",
+      "bos_token": "<wolf_start>",
+      "eos_token": "<wolf_end>",
+      "persona_token": "<wolf_persona>"
+    }
+  },
+
+  "training": {
+    "batch_size": 4,
+    "learning_rate": 5e-5,
+    "weight_decay": 0.01,
+    "warmup_steps": 500,
+    "max_steps": 100000,
+    "gradient_clip": 1.0,
+    "optimizer": "adamw",
+    "scheduler": "cosine",
+
+    "curriculum": {
+      "v0.1": "sentence_completion",
+      "v0.2": "qa_basic",
+      "v0.3": "short_conversations",
+      "v0.5": "persona_training",
+      "v1.0": "full_chatbot"
+    }
+  },
+
+  "conversation": {
+    "max_context_messages": 10,
+    "persona_enabled": true,
+    "default_persona": "Friendly, curious, slightly playful, helpful wolf-like assistant."
+  },
+
+  "paths": {
+    "model_weights": "pytorch_model.bin",
+    "dataset_raw": "training/dataset/raw/",
+    "dataset_cleaned": "training/dataset/cleaned/",
+    "train_corpus": "training/dataset/train.txt",
+    "checkpoints": "training/checkpoints/",
+    "logs": "training/logs/"
+  }
+}

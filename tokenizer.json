@@ -1,0 +1,34 @@
+{
+  "name": "WolfAI-Tokenizer",
+  "version": "0.1",
+  "type": "bpe",
+  "description": "Simple starter tokenizer for Wolf AI v0.1–v0.3",
+
+  "files": {
+    "vocab": "vocab.txt",
+    "merges": "merges.txt"
+  },
+
+  "special_tokens": {
+    "pad_token": "<pad>",
+    "unk_token": "<unk>",
+    "bos_token": "<wolf_start>",
+    "eos_token": "<wolf_end>",
+    "persona_token": "<wolf_persona>"
+  },
+
+  "normalizer": {
+    "lowercase": true,
+    "strip_accents": true
+  },
+
+  "pre_tokenizer": {
+    "type": "whitespace",
+    "split_on_punctuation": true
+  },
+
+  "post_processor": {
+    "add_bos_token": true,
+    "add_eos_token": true
+  }
+}
